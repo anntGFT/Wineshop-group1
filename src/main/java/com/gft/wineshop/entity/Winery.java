@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data
+@Data // Para los getters y setters
 @Entity
 @Table(name="winery") // Seleccionamos tabla
 public class Winery {
