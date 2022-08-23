@@ -6,4 +6,5 @@ import com.gft.wineshop.models.Winery;
 
 @Repository
 public interface WineryRepository extends JpaRepository<Winery, Integer> {
+    
 }

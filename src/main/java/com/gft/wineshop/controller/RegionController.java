@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 public class RegionController {
@@ -31,5 +34,13 @@ public class RegionController {
 
         return new ArrayList<>(regionRepository.findAll());
     }   
+
+    @DeleteMapping("/api/region/delete/{id}")
+    public void deleteRegion(@PathVariable(value = "id") int id) {
+
+        regionRepository.deleteById(id);
+
+    }
+    
     
 }
