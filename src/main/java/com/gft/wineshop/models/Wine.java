@@ -19,4 +19,16 @@ public class Wine {
     private Integer id;
     private String name;
     private String year;
+    
+     @ManyToOne
+    @JoinColumn(name = "winery_id")
+    private Winery winery;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
 }
