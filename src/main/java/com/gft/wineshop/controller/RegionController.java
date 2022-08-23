@@ -8,30 +8,43 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 public class RegionController {
 
     @Autowired
-    RegionRepository repository;
-    @RequestMapping("/api/region/{id}")
-    @ResponseBody
-  
+    RegionRepository regionRepository;
+
+
+
+    @GetMapping("/api/region/{id}")
     // Method
-    public String getRegion(@RequestParam int id)
-    {
-        return "Tenemos region";
+    public Optional<Region> getRegion(@PathVariable(value = "id") int id){
+
+        return regionRepository.findById(id);
+
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
-    @GetMapping("/regions")
+    @GetMapping("/api/regions")
     public List<Region> getAll(){
 
-        return new ArrayList<>(repository.findAll());
+
+        return new ArrayList<>(regionRepository.findAll());
+    }   
+
+    @DeleteMapping("/api/region/delete/{id}")
+    public void deleteRegion(@PathVariable(value = "id") int id) {
+
+        regionRepository.deleteById(id);
+
+    }
+    
+
 }
+
     
 }
