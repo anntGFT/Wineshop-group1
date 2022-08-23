@@ -1,13 +1,20 @@
 package com.gft.wineshop.controller;
 
+import com.gft.wineshop.models.Region;
+import com.gft.wineshop.repositories.RegionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
 public class RegionController {
 
+    @Autowired
+    RegionRepository repository;
     @RequestMapping("/api/region/{id}")
     @ResponseBody
   
@@ -16,5 +23,15 @@ public class RegionController {
     {
         return "Tenemos region";
     }
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
+    @GetMapping("/regions")
+    public List<Region> getAll(){
+
+        return new ArrayList<>(repository.findAll());
+}
     
 }
