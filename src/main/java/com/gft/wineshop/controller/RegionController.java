@@ -26,10 +26,10 @@ public class RegionController {
 
     }
 
-    @GetMapping("/api/region")
+    @GetMapping("/api/regions")
     public List<Region> getAll(){
 
         return new ArrayList<>(regionRepository.findAll());
-}
+    }   
     
 }
