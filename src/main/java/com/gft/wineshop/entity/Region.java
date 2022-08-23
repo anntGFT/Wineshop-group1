@@ -9,11 +9,12 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="winery") // Seleccionamos tabla
-public class Winery {
+@Table(name="region")
+public class Region {
     @Id
     @GeneratedValue
-
+    
     private Integer id;
     private String name;
+    private String country;
 }
