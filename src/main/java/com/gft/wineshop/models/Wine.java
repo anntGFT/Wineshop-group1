@@ -3,6 +3,8 @@ package com.gft.wineshop.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -20,7 +22,7 @@ public class Wine {
     private String name;
     private String year;
     
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "winery_id")
     private Winery winery;
 
