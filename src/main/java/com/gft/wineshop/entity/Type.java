@@ -9,11 +9,11 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="winery") // Seleccionamos tabla
-public class Winery {
+@Table(name="type")
+public class Type {
     @Id
     @GeneratedValue
-
+    
     private Integer id;
     private String name;
 }
