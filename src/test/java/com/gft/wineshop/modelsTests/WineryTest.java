@@ -1,0 +1,38 @@
+package com.gft.wineshop.modelsTests;
+
+import org.junit.jupiter.api.Test;
+
+class WineryTest {
+
+    @Test
+    void getId() {
+    }
+
+    @Test
+    void getName() {
+    }
+
+    @Test
+    void setId() {
+    }
+
+    @Test
+    void setName() {
+    }
+
+    @Test
+    void testEquals() {
+    }
+
+    @Test
+    void canEqual() {
+    }
+
+    @Test
+    void testHashCode() {
+    }
+
+    @Test
+    void testToString() {
+    }
+}
