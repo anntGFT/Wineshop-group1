@@ -5,21 +5,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Winery {
+public class Wine {
     @Id()
     @GeneratedValue
 
     private Integer id;
     private String name;
-
-    public Winery() {
+    private String year;
+    
+    public Wine() {
 
     }
 
-    public Winery(Integer id, String nane) {
+    public Wine(Integer id, String name, String year) {
         super();
         this.id = id;
         this.name = name;
+        this.year = year;
     }
 
     public Integer getId() {
@@ -36,5 +38,13 @@ public class Winery {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }
