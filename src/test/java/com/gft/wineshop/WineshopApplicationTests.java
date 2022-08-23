@@ -7,7 +7,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 class WineshopApplicationTests {
 
     @Test
-    void contextLoads() {
+    void TestCreate(){
+
     }
+    @Test
+    void TestUpdate(){
+
+    }
+    @Test
+    void TestDelete(){
+
+
+    }
+
 
 }
