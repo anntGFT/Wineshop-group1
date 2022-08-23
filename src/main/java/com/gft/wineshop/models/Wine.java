@@ -1,4 +1,4 @@
-package com.gft.wineshop.entity;
+package com.gft.wineshop.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

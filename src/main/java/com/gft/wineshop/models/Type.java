@@ -1,4 +1,4 @@
-package com.gft.wineshop.entity;
+package com.gft.wineshop.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +9,11 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="winery") // Seleccionamos tabla
-public class Winery {
+@Table(name="type")
+public class Type {
     @Id
     @GeneratedValue
-
+    
     private Integer id;
     private String name;
 }
