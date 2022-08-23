@@ -30,7 +30,6 @@ public class RegionController {
     }
     @GetMapping("/regions")
     public List<Region> getAll(){
-
         return new ArrayList<>(repository.findAll());
 }
     
