@@ -4,44 +4,49 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.gft.wineshop.models.Region;
 import com.gft.wineshop.models.Type;
-import com.gft.wineshop.repositories.TypeRepository;
+import com.gft.wineshop.services.TypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class TypeController {
 
     @Autowired
-    TypeRepository typeRepository;
+    TypeService service;
 
 
     @GetMapping("/api/type/{id}")
-     
     // Method
-    public Optional<Type> getType(@PathVariable(value = "id") int id)
-    {
-        return typeRepository.findById(id);
+    public Optional<Type> getType(@PathVariable(value = "id") int id) {
+
+        return Optional.ofNullable(service.findById(id));
+
     }
 
-
     @GetMapping("/api/types")
-    public List<Type> getAll(){
+    public List<Type> getAll() {
 
-        return new ArrayList<>(typeRepository.findAll());
+        return new ArrayList<>(service.findAll());
     }
 
     @DeleteMapping("/api/type/delete/{id}")
     public void deleteType(@PathVariable(value = "id") int id) {
 
-        typeRepository.deleteById(id);
-        
+        service.deleteById(id);
+
     }
-    
+
+    @PostMapping("/api/type/create")
+    public Type createType(Type type){
+        return service.save(type);
+    }
+
+    @PutMapping("/api/type/update/{id}")
+    public Type updateType(@PathVariable int id, @RequestBody Type type){
+        return service.update(id, type);
+    }
+
 }
