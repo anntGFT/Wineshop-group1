@@ -12,9 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 public class ExceptionResponse {
     @ExceptionHandler(Exception.class)
+	
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
