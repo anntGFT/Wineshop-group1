@@ -25,7 +25,7 @@ public class CustomWebSecurityAdapter{
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/regions").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/api/regions").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
