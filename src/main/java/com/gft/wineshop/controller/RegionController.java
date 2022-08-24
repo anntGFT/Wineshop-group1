@@ -47,7 +47,7 @@ public class RegionController {
         return service.save(region);
     }
 
-    @PutMapping("/api/region/{id}")
+    @PutMapping("/api/region/update/{id}")
     public Region updateRegion(@PathVariable int id, @RequestBody Region region){
         return service.update(id, region);
     }
