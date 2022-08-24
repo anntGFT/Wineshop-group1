@@ -34,6 +34,7 @@ public class RegionControllerTest{
     }
 
     @Test
+
     void testGetAllRegions() throws Exception{
         MvcResult result = mockMvc.perform(get("/api/regions").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

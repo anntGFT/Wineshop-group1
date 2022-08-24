@@ -34,6 +34,11 @@ public class WineService {
         Wine wine = findById(id);
         wine.setName(wine_new.getName());
         wine.setYear(wine_new.getYear());
+        wine.setRating(wine_new.getRating());
+        wine.setNum_reviews(wine_new.getNum_reviews());
+        wine.setPrice(wine_new.getPrice());
+        wine.setBody(wine_new.getBody());
+        wine.setAcidity(wine_new.getAcidity());
         wine.setWinery(wine_new.getWinery());
         wine.setType(wine_new.getType());
         wine.setRegion(wine_new.getRegion());
