@@ -21,7 +21,6 @@ public class RegionService {
         return repository.findAll();
     }
 
-    //Save into the mysql
     public Region save(Region region) {
         return repository.save(region);
     }
