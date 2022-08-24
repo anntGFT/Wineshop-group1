@@ -16,15 +16,15 @@ public class CustomWebSecurityAdapter{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable();
-                /*.authorizeRequests()
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/regions/create")
                 .hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/api/regions/update/").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic();*/
+                .httpBasic();
 
         return http.build();
     }
