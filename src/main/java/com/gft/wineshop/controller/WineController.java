@@ -1,17 +1,13 @@
 package com.gft.wineshop.controller;
 
+import com.gft.wineshop.models.Wine;
+import com.gft.wineshop.services.WineService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import com.gft.wineshop.models.Region;
-import com.gft.wineshop.services.WineService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import com.gft.wineshop.models.Wine;
-import com.gft.wineshop.repositories.WineRepository;
 
 @RestController
 public class WineController {
@@ -41,7 +37,7 @@ public class WineController {
     }
 
     @PostMapping("/api/wine/create")
-    public Wine createWine(Wine wine){
+    public Wine createWine(@RequestBody Wine wine){
         return service.save(wine);
     }
 
