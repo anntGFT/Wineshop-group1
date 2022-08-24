@@ -15,7 +15,6 @@ public class RegionControllerTest {
     @Test
     void testHello(){
         System.out.println(new RegionController().getAll());
-        assertEquals("hello", new RegionController().hello()); //uwu
     }
 
     @Test
