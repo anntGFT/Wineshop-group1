@@ -5,10 +5,7 @@ import com.gft.wineshop.services.WineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,13 +31,13 @@ public class WineController {
 
     @GetMapping("/api/recommend/best/{id}")
     // Method
-    public List<Wine> getBest(@PathVariable(value = "id") int id) {
+    public List<Wine> getBest(@PathVariable(value = "limit") int limit) {
 
         List<Wine> bestTen = service.findAll().parallelStream()
             
         .sorted(Comparator.comparingDouble(Wine::getRating).thenComparingInt(Wine::getNumReviews).reversed())
 
-        .limit(id)
+        .limit(limit)
 
         .collect(Collectors.toList());
 
@@ -80,19 +77,17 @@ public class WineController {
 
     }
 
-    @GetMapping("/api/recommend/vintage/{id}")
+    @GetMapping("/api/recommend/vintage/{limit}")
     // Method
-    public List<Wine> getVintage(@PathVariable(value = "id") int id) {
+    public Map<String,List<Wine>> getVintage(@PathVariable(value = "limit") int limit) {
 
-        List<Wine> vintage = service.findAll().parallelStream()
-            
-            .sorted(Comparator.comparingDouble(Wine::getPrice).reversed())
+        return service.findAll().parallelStream()
 
-            .limit(id)
-            
-            .collect(Collectors.toList());
+            .sorted(Comparator.comparing(Wine::getRating).thenComparingInt(Wine::getNumReviews).reversed())
 
-        return vintage;
+            .limit(limit)
+
+            .collect(Collectors.groupingBy(Wine::getYear));
 
     }
 
