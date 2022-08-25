@@ -32,17 +32,73 @@ public class WineController {
         return new ArrayList<>(service.findAll());
     }
 
-    @GetMapping("/api/recommend/best")
+    @GetMapping("/api/recommend/best/{id}")
     // Method
-    public List<Wine> getBest() {
-        List<Wine> bestTen = service.findAll().stream()
-            .sorted(Comparator.comparingDouble(Wine::getRating).reversed().thenComparing(Wine::getNumReviews).reversed())
-                .limit(10)
-            .collect(Collectors.toList());
+    public List<Wine> getBest(@PathVariable(value = "id") int id) {
+
+        List<Wine> bestTen = service.findAll().parallelStream()
+            
+        .sorted(Comparator.comparingDouble(Wine::getRating).thenComparingInt(Wine::getNumReviews).reversed())
+
+        .limit(id)
+
+        .collect(Collectors.toList());
 
         return bestTen;
 
     }
+
+    @GetMapping("/api/recommend/expensive/{id}")
+    // Method
+    public List<Wine> getMostExpensive(@PathVariable(value = "id") int id) {
+
+        List<Wine> mostExpensive = service.findAll().parallelStream()
+            
+        .sorted(Comparator.comparingDouble(Wine::getPrice).reversed())
+
+        .limit(id)
+
+        .collect(Collectors.toList());
+
+        return mostExpensive;
+
+    }
+
+    @GetMapping("/api/recommend/bang/{id}")
+    // Method
+    public List<Wine> getBestBang(@PathVariable(value = "id") int id) {
+
+        List<Wine> bestBang = service.findAll().parallelStream()
+            
+            .sorted(Comparator.comparingDouble(Wine::getPrice).reversed())
+
+            .limit(id)
+
+            .collect(Collectors.toList());
+
+        return bestBang;
+
+    }
+
+    @GetMapping("/api/recommend/vintage/{id}")
+    // Method
+    public List<Wine> getVintage(@PathVariable(value = "id") int id) {
+
+        List<Wine> vintage = service.findAll().parallelStream()
+            
+            .sorted(Comparator.comparingDouble(Wine::getPrice).reversed())
+
+            .limit(id)
+            
+            .collect(Collectors.toList());
+
+        return vintage;
+
+    }
+
+
+
+
 
     @DeleteMapping("/api/wine/delete/{id}")
     public void deleteRegion(@PathVariable(value = "id") int id) {
