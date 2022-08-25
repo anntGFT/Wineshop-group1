@@ -25,6 +25,7 @@ public class CustomWebSecurityAdapter{
         http
                 .sessionManagement((session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)))
                 .csrf().disable()
+
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/regions").authenticated()
