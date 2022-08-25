@@ -35,11 +35,9 @@ public class WineController {
     @GetMapping("/api/recommend/best")
     // Method
     public List<Wine> getBest() {
-        System.out.println(service.findAll());
-        Comparator<Wine> comparador= Comparator.comparing(Wine::getRating);
         List<Wine> bestTen = service.findAll().stream()
-            .sorted(comparador)
-            .limit(9)
+            .sorted(Comparator.comparingDouble(Wine::getRating).reversed().thenComparing(Wine::getNumReviews).reversed())
+                .limit(10)
             .collect(Collectors.toList());
 
         return bestTen;
