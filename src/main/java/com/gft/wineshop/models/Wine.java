@@ -20,8 +20,8 @@ public class Wine {
     private Float rating;
     private Integer num_reviews;
     private Float price;
-    private Integer body;
-    private Integer acidity;
+    private String body;
+    private String acidity;
     
     @ManyToOne
     @JoinColumn(name = "winery_id")
