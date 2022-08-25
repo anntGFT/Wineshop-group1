@@ -35,7 +35,7 @@ public class WineService {
         wine.setName(wine_new.getName());
         wine.setYear(wine_new.getYear());
         wine.setRating(wine_new.getRating());
-        wine.setNum_reviews(wine_new.getNum_reviews());
+        wine.setNumReviews(wine_new.getNumReviews());
         wine.setPrice(wine_new.getPrice());
         wine.setBody(wine_new.getBody());
         wine.setAcidity(wine_new.getAcidity());
