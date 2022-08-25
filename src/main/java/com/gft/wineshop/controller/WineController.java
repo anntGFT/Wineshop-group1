@@ -45,7 +45,7 @@ public class WineController {
     }
 
     @PostMapping("/api/wine/create")
-    public Wine createWine(Wine wine) throws WineForbiddenException, WineNoContentException {
+    public Wine createWine(@RequestBody Wine wine) throws WineForbiddenException, WineNoContentException {
         return service.save(wine);
     }
 

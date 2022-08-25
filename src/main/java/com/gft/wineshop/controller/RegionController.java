@@ -47,7 +47,7 @@ public class RegionController {
     }
 
     @PostMapping("/api/region/create")
-    public Region createRegion(Region region) throws RegionForbiddenException, RegionNoContentException {
+    public Region createRegion(@RequestBody Region region) throws RegionForbiddenException, RegionNoContentException {
         return service.save(region);
     }
 

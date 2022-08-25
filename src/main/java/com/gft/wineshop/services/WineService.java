@@ -39,7 +39,7 @@ public class WineService {
     }
 
     @ExceptionHandler(value = WineNotModifiedException.class)
-    public Wine update(int id, Wine wine_new) throws WineNotFoundException, WineForbiddenException, WineNotModifiedException  {
+    public Wine update(int id, Wine wine_new) throws WineNotFoundException, WineForbiddenException, WineNotModifiedException {
         Wine wine = findById(id);
         wine.setName(wine_new.getName());
         wine.setYear(wine_new.getYear());

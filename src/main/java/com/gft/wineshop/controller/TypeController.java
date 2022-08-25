@@ -44,7 +44,7 @@ public class TypeController {
     }
 
     @PostMapping("/api/type/create")
-    public Type createType(Type type) throws TypeForbiddenException, TypeNoContentException {
+    public Type createType(@RequestBody Type type) throws TypeForbiddenException, TypeNoContentException {
         return service.save(type);
     }
 
