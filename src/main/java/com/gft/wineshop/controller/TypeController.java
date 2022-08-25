@@ -1,15 +1,13 @@
 package com.gft.wineshop.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import com.gft.wineshop.models.Region;
 import com.gft.wineshop.models.Type;
 import com.gft.wineshop.services.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TypeController {
@@ -40,7 +38,7 @@ public class TypeController {
     }
 
     @PostMapping("/api/type/create")
-    public Type createType(Type type){
+    public Type createType(@RequestBody Type type){
         return service.save(type);
     }
 

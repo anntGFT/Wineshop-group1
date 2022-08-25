@@ -38,7 +38,7 @@ public class WineryController {
     }
 
     @PostMapping("/api/winery/create")
-    public Winery createWinery(Winery winery){
+    public Winery createWinery(@RequestBody Winery winery){
         return service.save(winery);
     }
 

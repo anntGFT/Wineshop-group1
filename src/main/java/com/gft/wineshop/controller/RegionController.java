@@ -1,17 +1,13 @@
 package com.gft.wineshop.controller;
 
 import com.gft.wineshop.models.Region;
-import com.gft.wineshop.repositories.RegionRepository;
 import com.gft.wineshop.services.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -43,7 +39,7 @@ public class RegionController {
     }
 
     @PostMapping("/api/region/create")
-    public Region createRegion(Region region){
+    public Region createRegion(@RequestBody Region region){
         return service.save(region);
     }
 
