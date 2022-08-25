@@ -16,10 +16,4 @@ public class Region {
     private Integer id;
     private String name;
     private String country;
-    public Region orElseThrow(Object object) {
-        return null;
-    }
-    public Region orElseThrow(Object object) {
-        return null;
-    }
 }
