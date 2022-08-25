@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,10 +34,11 @@ public class WineController {
 
     @GetMapping("/api/recommend/best")
     // Method
-    public List<WineService> getBest() {
-
-        List<WineService> bestTen = Stream.of(service)
-            .sorted()
+    public List<Wine> getBest() {
+        System.out.println(service.findAll());
+        Comparator<Wine> comparador= Comparator.comparing(Wine::getRating);
+        List<Wine> bestTen = service.findAll().stream()
+            .sorted(comparador)
             .limit(9)
             .collect(Collectors.toList());
 

@@ -1,4 +1,4 @@
---drop table winery;
+drop table winery;
 create table winery
 (
     id   integer auto_increment primary key,
@@ -6,7 +6,7 @@ create table winery
 );
 insert into winery (name, id) (select distinct winery, 0 from wines_spa);
 
---drop table type;
+drop table type;
 create table type
 (
     id   integer auto_increment primary key,
@@ -14,7 +14,7 @@ create table type
 );
 insert into type (name, id) (select distinct type, 0 from wines_spa);
 
---drop table region;
+drop table region;
 create table region
 (
     id      integer auto_increment primary key,
@@ -24,12 +24,17 @@ create table region
 insert into region (name, id, country) (select distinct region, 0, 'Espana' from wines_spa);
 
 
---drop table wine;
+drop table wine;
 create table wine
 (
     id        integer auto_increment primary key,
     name      varchar(255),
     year      varchar(255),
+    rating    float,
+    num_reviews  integer,
+    price     float,
+    body      varchar(16),
+    acidity   varchar(16),
     winery_id integer references winery (id),
     type_id   integer references type (id),
     region_id integer references region (id)
@@ -40,6 +45,11 @@ insert into wine
 select w.id      as id,
        w.wine    as name,
        w.year    as year,
+       w.rating  as rating,
+       w.num_reviews as num_reviews,
+       w.price as price,
+       w.body as body,
+       w.acidity as acidity,
        winery.id as winery_id,
        type.id   as type_id,
        region.id as region_id
