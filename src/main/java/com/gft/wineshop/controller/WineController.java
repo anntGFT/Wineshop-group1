@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 public class WineController {
@@ -27,6 +29,19 @@ public class WineController {
     public List<Wine> getAll() {
 
         return new ArrayList<>(service.findAll());
+    }
+
+    @GetMapping("/api/recommend/best")
+    // Method
+    public List<WineService> getBest() {
+
+        List<WineService> bestTen = Stream.of(service)
+            .sorted()
+            .limit(9)
+            .collect(Collectors.toList());
+
+        return bestTen;
+
     }
 
     @DeleteMapping("/api/wine/delete/{id}")
