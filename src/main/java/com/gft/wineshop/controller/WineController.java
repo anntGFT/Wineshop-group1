@@ -67,7 +67,7 @@ public class WineController {
 
     }
 
-    @GetMapping("/api/recommend/bang/")
+    @GetMapping("/api/recommend/bang/{id}")
     // Method
     public List<Wine> getBang(@RequestParam(required = false, defaultValue = "10") Integer top) {
 
