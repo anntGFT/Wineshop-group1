@@ -17,12 +17,15 @@ public class Wine {
     private Integer id;
     private String name;
     private String year;
-/*    private Float rating;
-    private Integer num_reviews;
+
+    private Float rating;
+    @Column(name = "num_reviews")
+    private Integer numReviews;
     private Float price;
-    private Integer body;
-    private Integer acidity;
-    */
+    private String body;
+    private String acidity;
+
+
     @ManyToOne
     @JoinColumn(name = "winery_id")
     private Winery winery;
