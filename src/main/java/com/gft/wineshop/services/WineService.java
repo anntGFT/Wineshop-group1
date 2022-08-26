@@ -1,5 +1,9 @@
 package com.gft.wineshop.services;
 
+import com.gft.wineshop.exceptions.WineForbiddenException;
+import com.gft.wineshop.exceptions.WineNoContentException;
+import com.gft.wineshop.exceptions.WineNotFoundException;
+import com.gft.wineshop.exceptions.WineNotModifiedException;
 import com.gft.wineshop.models.Region;
 import com.gft.wineshop.models.Wine;
 import com.gft.wineshop.repositories.RegionRepository;
@@ -9,7 +13,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import org.springframework.web.bind.annotation.PathVariable;
+
 
 import java.util.List;
 
@@ -19,20 +27,24 @@ public class WineService {
     @Autowired
     private WineRepository repository;
 
-    public Wine findById(Integer id) {
-        return repository.findById(id).orElse(null);
+    @ExceptionHandler(value = WineNotFoundException.class)
+    public Wine findById(Integer id) throws WineNotFoundException {
+        return repository.findById(id).orElseThrow(() -> new WineNotFoundException());
     }
 
-    public List<Wine> findAll() {
+    public List<Wine> findAll() throws WineNotFoundException {
         return repository.findAll();
     }
 
-    public Wine save(Wine wine) {
+    @ExceptionHandler({WineForbiddenException.class, WineNoContentException.class})
+    public Wine save(Wine wine) throws WineForbiddenException, WineNoContentException {
         return repository.save(wine);
     }
-    public void deleteById(Integer id) {
+    
+    public void deleteById(Integer id) throws WineNotFoundException, WineForbiddenException, WineNotModifiedException {
         repository.deleteById(id);
     }
+
 
     public List<Wine> findByBang(int top) {
 
@@ -42,7 +54,9 @@ public class WineService {
         return listOfWines.getContent();
     }
 
-    public Wine update(int id, Wine wine_new) {
+    @ExceptionHandler(value = WineNotModifiedException.class)
+    public Wine update(int id, Wine wine_new) throws WineNotFoundException, WineForbiddenException, WineNotModifiedException {
+
         Wine wine = findById(id);
         wine.setName(wine_new.getName());
         wine.setYear(wine_new.getYear());

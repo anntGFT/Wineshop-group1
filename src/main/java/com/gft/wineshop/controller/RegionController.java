@@ -33,7 +33,10 @@ public class RegionController {
     }
 
     @GetMapping("/api/regions")
+
+
     public List<Region> getAll() throws RegionNotFoundException{
+
 
         return new ArrayList<>(service.findAll());
     }
