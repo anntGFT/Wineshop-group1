@@ -1,10 +1,8 @@
 package com.gft.wineshop.services;
 
-import com.gft.wineshop.exceptions.ExceptionResponse;
 import com.gft.wineshop.models.Region;
 import com.gft.wineshop.repositories.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
