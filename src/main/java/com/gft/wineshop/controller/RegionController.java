@@ -5,17 +5,16 @@ import com.gft.wineshop.exceptions.RegionNoContentException;
 import com.gft.wineshop.exceptions.RegionNotFoundException;
 import com.gft.wineshop.exceptions.RegionNotModifiedException;
 import com.gft.wineshop.models.Region;
-import com.gft.wineshop.repositories.RegionRepository;
 import com.gft.wineshop.services.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @RestController
@@ -34,7 +33,10 @@ public class RegionController {
     }
 
     @GetMapping("/api/regions")
-    public List<Region> getAll() throws RegionNotFoundException {
+
+
+    public List<Region> getAll() throws RegionNotFoundException{
+
 
         return new ArrayList<>(service.findAll());
     }

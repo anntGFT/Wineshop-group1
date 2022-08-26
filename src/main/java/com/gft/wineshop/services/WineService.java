@@ -9,8 +9,15 @@ import com.gft.wineshop.models.Wine;
 import com.gft.wineshop.repositories.RegionRepository;
 import com.gft.wineshop.repositories.WineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 import java.util.List;
 
@@ -38,13 +45,23 @@ public class WineService {
         repository.deleteById(id);
     }
 
+
+    public List<Wine> findByBang(int top) {
+
+        Page<Wine> listOfWines = repository.findAll(PageRequest.of(0, top, Sort.by("price").ascending()
+                .and(Sort.by("rating").descending())));
+
+        return listOfWines.getContent();
+    }
+
     @ExceptionHandler(value = WineNotModifiedException.class)
     public Wine update(int id, Wine wine_new) throws WineNotFoundException, WineForbiddenException, WineNotModifiedException {
+
         Wine wine = findById(id);
         wine.setName(wine_new.getName());
         wine.setYear(wine_new.getYear());
         wine.setRating(wine_new.getRating());
-        wine.setNum_reviews(wine_new.getNum_reviews());
+        wine.setNumReviews(wine_new.getNumReviews());
         wine.setPrice(wine_new.getPrice());
         wine.setBody(wine_new.getBody());
         wine.setAcidity(wine_new.getAcidity());
