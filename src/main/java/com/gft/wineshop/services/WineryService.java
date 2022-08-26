@@ -1,8 +1,6 @@
 package com.gft.wineshop.services;
 
-import com.gft.wineshop.models.Region;
 import com.gft.wineshop.models.Winery;
-import com.gft.wineshop.repositories.RegionRepository;
 import com.gft.wineshop.repositories.WineryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +13,8 @@ public class WineryService {
     @Autowired
     private WineryRepository repository;
 
-    public Winery findById(Integer id) {
-        return repository.findById(id).orElse(null);
+    public Winery findById(Integer id) throws Exception {
+        return repository.findById(id).orElseThrow(Exception::new);
     }
 
     public List<Winery> findAll() {
@@ -31,7 +29,7 @@ public class WineryService {
         repository.deleteById(id);
     }
 
-    public Winery update(int id, Winery winery_new) {
+    public Winery update(int id, Winery winery_new) throws Exception{
         Winery winery = findById(id);
         winery.setName(winery_new.getName());
         return repository.save(winery);

@@ -18,7 +18,7 @@ public class WineryController {
 
     @GetMapping("/api/winery/{id}")
     // Method
-    public Optional<Winery> getWinery(@PathVariable(value = "id") int id) {
+    public Optional<Winery> getWinery(@PathVariable(value = "id") int id) throws Exception{
 
         return Optional.ofNullable(service.findById(id));
 
@@ -43,7 +43,7 @@ public class WineryController {
     }
 
     @PutMapping("/api/winery/update/{id}")
-    public Winery updateWinery(@PathVariable int id, @RequestBody Winery winery){
+    public Winery updateWinery(@PathVariable int id, @RequestBody Winery winery) throws Exception{
         return service.update(id, winery);
     }
 

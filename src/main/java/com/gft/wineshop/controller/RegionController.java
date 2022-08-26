@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -19,9 +18,9 @@ public class RegionController {
 
     @GetMapping("/api/region/{id}")
     // Method
-    public Optional<Region> getRegion(@PathVariable(value = "id") int id) {
+    public /*Optional<*/Region/*>*/ getRegion(@PathVariable(value = "id") int id) throws Exception{
 
-        return Optional.ofNullable(service.findById(id));
+        return /*Optional.ofNullable(*/service.findById(id)/*)*/;
 
     }
 
@@ -44,7 +43,7 @@ public class RegionController {
     }
 
     @PutMapping("/api/region/update/{id}")
-    public Region updateRegion(@PathVariable int id, @RequestBody Region region){
+    public Region updateRegion(@PathVariable int id, @RequestBody Region region) throws Exception{
         return service.update(id, region);
     }
 

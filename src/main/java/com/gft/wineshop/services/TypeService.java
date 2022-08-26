@@ -13,8 +13,8 @@ public class TypeService {
     @Autowired
     private TypeRepository repository;
 
-    public Type findById(Integer id) {
-        return repository.findById(id).orElse(null);
+    public Type findById(Integer id) throws Exception {
+        return repository.findById(id).orElseThrow(Exception::new);
     }
 
     public List<Type> findAll() {
@@ -29,7 +29,7 @@ public class TypeService {
         repository.deleteById(id);
     }
 
-    public Type update(int id, Type type_new) {
+    public Type update(int id, Type type_new) throws Exception{
         Type type = findById(id);
         type.setName(type_new.getName());
         return repository.save(type);

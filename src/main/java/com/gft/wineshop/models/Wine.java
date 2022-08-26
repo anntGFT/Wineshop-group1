@@ -1,9 +1,9 @@
 package com.gft.wineshop.models;
 
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -17,12 +17,12 @@ public class Wine {
     private Integer id;
     private String name;
     private String year;
-    private Float rating;
+/*    private Float rating;
     private Integer num_reviews;
     private Float price;
     private Integer body;
     private Integer acidity;
-    
+    */
     @ManyToOne
     @JoinColumn(name = "winery_id")
     private Winery winery;

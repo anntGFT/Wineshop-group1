@@ -18,7 +18,7 @@ public class TypeController {
 
     @GetMapping("/api/type/{id}")
     // Method
-    public Optional<Type> getType(@PathVariable(value = "id") int id) {
+    public Optional<Type> getType(@PathVariable(value = "id") int id) throws Exception{
 
         return Optional.ofNullable(service.findById(id));
 
@@ -43,7 +43,7 @@ public class TypeController {
     }
 
     @PutMapping("/api/type/update/{id}")
-    public Type updateType(@PathVariable int id, @RequestBody Type type){
+    public Type updateType(@PathVariable int id, @RequestBody Type type) throws Exception{
         return service.update(id, type);
     }
 

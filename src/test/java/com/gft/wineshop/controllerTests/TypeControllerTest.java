@@ -3,6 +3,7 @@ package com.gft.wineshop.controllerTests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gft.wineshop.models.Type;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -31,6 +33,17 @@ public class TypeControllerTest {
                 .andExpect(jsonPath("$.name",is(("Toro Red"))));
     }
     @Test
+    void testGetType_TypeNull() throws Exception{
+
+        try {
+            assertThrows(Exception.class, (Executable) mockMvc.perform(get("/api/type/0").contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isInternalServerError()));
+        }catch(Exception e){
+
+        }
+        // asserThrows()
+    }
+    @Test
     void testGetAllTypes() throws Exception{
         MvcResult result = mockMvc.perform(get("/api/types")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -42,9 +55,9 @@ public class TypeControllerTest {
     @Test
     void testCreateType() throws Exception{
         Type type = new Type();
-        type.setName("testType");
+        type.setName("Jackie Welles");
         mockMvc.perform(post("/api/type/create")
-                        .with(user("admin").roles("ADMIN"))
+                        .with(user("user").roles("USER"))
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(type)))

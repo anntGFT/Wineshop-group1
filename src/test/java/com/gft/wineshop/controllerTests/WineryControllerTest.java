@@ -3,6 +3,7 @@ package com.gft.wineshop.controllerTests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gft.wineshop.models.Winery;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -29,7 +31,17 @@ class WineryControllerTest {
                 .andExpect(jsonPath("$.id",is(1)))
                 .andExpect(jsonPath("$.name",is(("Teso La Monja"))));
     }
+    @Test
+    void testGetWinery_WineryNull() throws Exception{
 
+        try {
+            assertThrows(Exception.class, (Executable) mockMvc.perform(get("/api/winery/0").contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isInternalServerError()));
+        }catch(Exception e){
+
+        }
+        // asserThrows()
+    }
     @Test
     void testGetAllWineries() throws Exception{
         MvcResult result = mockMvc.perform(get("/api/wineries").contentType(MediaType.APPLICATION_JSON))
@@ -41,9 +53,9 @@ class WineryControllerTest {
     @Test
     void testCreateWinery() throws Exception{
         Winery winery = new Winery();
-        winery.setName("testWinery");
+        winery.setName("Bar de Moe");
         mockMvc.perform(post("/api/winery/create")
-                        .with(user("admin").roles("ADMIN"))
+                        .with(user("user").roles("USER"))
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(winery)))
