@@ -1,8 +1,12 @@
 package com.gft.wineshop.controller;
 
 import com.gft.wineshop.models.Wine;
+import com.gft.wineshop.repositories.WineRepository;
 import com.gft.wineshop.services.WineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -14,6 +18,8 @@ public class WineController {
 
     @Autowired
     WineService service;
+    @Autowired
+    WineRepository repository;
 
     @GetMapping("/api/wine/{id}")
     // Method
@@ -29,7 +35,7 @@ public class WineController {
         return new ArrayList<>(service.findAll());
     }
 
-    @GetMapping("/api/recommend/best/{id}")
+    @GetMapping("/api/recommend/best/{limit}")
     // Method
     public List<Wine> getBest(@PathVariable(value = "limit") int limit) {
 
@@ -45,15 +51,15 @@ public class WineController {
 
     }
 
-    @GetMapping("/api/recommend/expensive/{id}")
+    @GetMapping("/api/recommend/expensive/{limit}")
     // Method
-    public List<Wine> getMostExpensive(@PathVariable(value = "id") int id) {
+    public List<Wine> getMostExpensive(@PathVariable(value = "limit") int limit) {
 
         List<Wine> mostExpensive = service.findAll().parallelStream()
             
         .sorted(Comparator.comparingDouble(Wine::getPrice).reversed())
 
-        .limit(id)
+        .limit(limit)
 
         .collect(Collectors.toList());
 
@@ -61,19 +67,11 @@ public class WineController {
 
     }
 
-    @GetMapping("/api/recommend/bang/{id}")
+    @GetMapping("/api/recommend/bang/")
     // Method
-    public List<Wine> getBestBang(@PathVariable(value = "id") int id) {
+    public List<Wine> getBang(@RequestParam(required = false, defaultValue = "10") Integer top) {
 
-        List<Wine> bestBang = service.findAll().parallelStream()
-            
-            .sorted(Comparator.comparingDouble(Wine::getPrice).reversed())
-
-            .limit(id)
-
-            .collect(Collectors.toList());
-
-        return bestBang;
+        return service.findByBang(10);
 
     }
 

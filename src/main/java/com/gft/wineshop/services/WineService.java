@@ -5,7 +5,11 @@ import com.gft.wineshop.models.Wine;
 import com.gft.wineshop.repositories.RegionRepository;
 import com.gft.wineshop.repositories.WineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -28,6 +32,14 @@ public class WineService {
     }
     public void deleteById(Integer id) {
         repository.deleteById(id);
+    }
+
+    public List<Wine> findByBang(int top) {
+
+        Page<Wine> listOfWines = repository.findAll(PageRequest.of(0, top, Sort.by("price").ascending()
+                .and(Sort.by("rating").descending())));
+
+        return listOfWines.getContent();
     }
 
     public Wine update(int id, Wine wine_new) {
