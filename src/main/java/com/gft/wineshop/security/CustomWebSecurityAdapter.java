@@ -28,7 +28,6 @@ public class CustomWebSecurityAdapter{
 
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/api/regions").authenticated()
                 .antMatchers("/api/regions/create").authenticated()
                 .antMatchers("/api/regions/update").authenticated()
                 .antMatchers("/api/regions/delete").hasAnyAuthority("ROLE_ADMIN")
